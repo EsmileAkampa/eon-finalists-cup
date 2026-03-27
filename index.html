@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EON Interprogram Finalists Cup 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6B00;
+    --orange-light: #FF8C33;
+    --orange-dim: #FF6B0022;
+    --orange-glow: #FF6B0044;
+    --gold: #FFB800;
+    --gold-dim: #FFB80033;
+    --cream: #FFF5E6;
+  }
+
+  [data-theme="dark"] {
+    --bg: #080808;
+    --bg2: #0F0F0F;
+    --bg3: #161616;
+    --bg4: #1E1E1E;
+    --surface: #1A1A1A;
+    --surface2: #222222;
+    --border: #2A2A2A;
+    --border-bright: #FF6B0055;
+    --text: #F5F0E8;
+    --text-muted: #888880;
+    --text-dim: #444440;
+    --card-bg: rgba(20,20,20,0.9);
+    --nav-bg: rgba(8,8,8,0.92);
+    --hero-overlay: rgba(8,8,8,0.55);
+    --section-alt: #0D0D0D;
+  }
+
+  [data-theme="light"] {
+    --bg: #FFF8F0;
+    --bg2: #FFF2E3;
+    --bg3: #FFE8CC;
+    --bg4: #FFDDAA;
+    --surface: #FFFFFF;
+    --surface2: #FFF4E6;
+    --border: #FFD4A0;
+    --border-bright: #FF6B0055;
+    --text: #1A1000;
+    --text-muted: #7A5500;
+    --text-dim: #C8A060;
+    --card-bg: rgba(255,255,255,0.92);
+    --nav-bg: rgba(255,248,240,0.95);
+    --hero-overlay: rgba(255,240,220,0.35);
+    --section-alt: #FFF2E0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    transition: all 0.4s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 2px;
+    color: var(--orange);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-links {
+    display: flex; gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+
+  .theme-toggle {
+    width: 44px; height: 24px;
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+    display: flex; align-items: center; padding: 0 3px;
+  }
+  .theme-toggle::after {
+    content: '';
+    width: 18px; height: 18px;
+    background: var(--orange);
+    border-radius: 50%;
+    position: absolute;
+    left: 3px;
+    transition: transform 0.3s;
+    box-shadow: 0 0 8px var(--orange-glow);
+  }
+  [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
+  .theme-icon { font-size: 0.75rem; color: var(--text-muted); }
+
+  .nav-cta {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 0 20px var(--orange-glow);
+  }
+  .nav-cta:hover { background: var(--orange-light); transform: translateY(-1px); box-shadow: 0 4px 24px var(--orange-glow); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    padding-top: 64px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, #FF6B0015 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, #FFB80010 0%, transparent 50%),
+      var(--bg);
+  }
+
+  /* Animated grass lines */
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 38px,
+        rgba(255,107,0,0.03) 38px,
+        rgba(255,107,0,0.03) 40px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 58px,
+        rgba(255,107,0,0.02) 58px,
+        rgba(255,107,0,0.02) 60px
+      );
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, #FF6B0018, transparent); top: -100px; right: -100px; animation-delay: 0s; }
+  .orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, #FFB80012, transparent); bottom: 100px; left: -50px; animation-delay: -3s; }
+  .orb-3 { width: 200px; height: 200px; background: radial-gradient(circle, #FF6B0010, transparent); top: 50%; left: 40%; animation-delay: -5s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  /* Soccer field lines overlay */
+  .field-lines {
+    position: absolute; inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Crect x='50' y='30' width='700' height='440' fill='none' stroke='%23FF6B00' stroke-width='2'/%3E%3Cline x1='400' y1='30' x2='400' y2='470' stroke='%23FF6B00' stroke-width='1.5'/%3E%3Ccircle cx='400' cy='250' r='70' fill='none' stroke='%23FF6B00' stroke-width='1.5'/%3E%3Ccircle cx='400' cy='250' r='4' fill='%23FF6B00'/%3E%3Crect x='50' y='170' width='120' height='160' fill='none' stroke='%23FF6B00' stroke-width='1.5'/%3E%3Crect x='630' y='170' width='120' height='160' fill='none' stroke='%23FF6B00' stroke-width='1.5'/%3E%3Crect x='50' y='200' width='50' height='100' fill='none' stroke='%23FF6B00' stroke-width='1.5'/%3E%3Crect x='700' y='200' width='50' height='100' fill='none' stroke='%23FF6B00' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    padding: 0 5%;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange-dim);
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.5; transform:scale(1.5);} }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s ease 0.1s both;
+    color: var(--text);
+  }
+  .hero-title .accent { color: var(--orange); display: block; }
+  .hero-title .year {
+    -webkit-text-stroke: 2px var(--orange);
+    color: transparent;
+    display: block;
+    font-size: clamp(2rem, 7vw, 5.5rem);
+    letter-spacing: 8px;
+  }
+
+  .hero-tagline {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: var(--orange-light);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 16px;
+    margin-bottom: 40px;
+    font-style: italic;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-meta {
+    display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .meta-item {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 12px 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    min-width: 120px;
+  }
+  .meta-label { font-size: 0.65rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+  .meta-value { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+  .meta-value.orange { color: var(--orange); }
+
+  .hero-ctas {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+
+  .btn-primary {
+    background: var(--orange);
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    box-shadow: 0 8px 32px var(--orange-glow);
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after { content:''; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); transform: translateX(-100%); transition: transform 0.4s; }
+  .btn-primary:hover::after { transform: translateX(100%); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px var(--orange-glow); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 14px 36px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.25s;
+    backdrop-filter: blur(8px);
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-strip {
+    background: var(--orange);
+    padding: 16px 5%;
+    display: flex; justify-content: center; align-items: center; gap: 48px;
+    flex-wrap: wrap;
+  }
+  .countdown-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 3px; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+  .countdown-units { display: flex; gap: 24px; }
+  .c-unit { text-align: center; }
+  .c-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; color: #fff; }
+  .c-label { font-size: 0.6rem; letter-spacing: 2px; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 5%; }
+  .section-alt { background: var(--section-alt); }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    font-family: 'Space Mono', monospace;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .section-header { margin-bottom: 60px; }
+
+  /* ─── ABOUT / INFO CARDS ─── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .info-card:hover { border-color: var(--border-bright); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .info-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--orange), var(--gold)); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .info-card:hover::before { transform: scaleX(1); }
+
+  .card-icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; color: var(--text); margin-bottom: 10px; }
+  .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .card-highlight { color: var(--orange); font-weight: 700; }
+
+  /* ─── VENUE SECTION ─── */
+  .venue-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 800px) { .venue-layout { grid-template-columns: 1fr; } }
+
+  .venue-image-placeholder {
+    aspect-ratio: 4/3;
+    background: var(--surface);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .venue-image-placeholder:hover { border-color: var(--orange); }
+  .venue-image-placeholder .img-icon { font-size: 3rem; opacity: 0.4; }
+  .venue-image-placeholder .img-label { opacity: 0.5; font-size: 0.75rem; font-family: 'Space Mono', monospace; }
+  .venue-image-placeholder-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--orange-dim), transparent 50%, var(--gold-dim));
+    pointer-events: none;
+  }
+
+  .venue-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+  .venue-feature {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .feature-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── TOURNAMENT FORMAT ─── */
+  .format-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+  .format-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .format-card:hover { border-color: var(--orange); }
+  .format-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--orange); line-height: 1; }
+  .format-unit { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .format-label { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  /* ─── PRIZES ─── */
+  .prizes-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+
+  .prize-card {
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .prize-card.gold-card {
+    background: linear-gradient(135deg, #1A1200, #2A1E00);
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 40px #FFB80020;
+  }
+  .prize-card.silver-card {
+    background: var(--surface);
+    border: 1px solid #888;
+  }
+  .prize-card.special-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  [data-theme="light"] .prize-card.gold-card { background: linear-gradient(135deg, #FFF8E0, #FFF0B3); }
+  [data-theme="light"] .prize-card.silver-card { background: #f5f5f5; }
+
+  .prize-pos { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1; }
+  .gold-card .prize-pos { color: var(--gold); }
+  .silver-card .prize-pos { color: #AAAAAA; }
+  .prize-amount { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin: 8px 0; }
+  .gold-card .prize-amount { color: var(--gold); }
+  .silver-card .prize-amount { color: #AAAAAA; }
+  .special-card .prize-amount { color: var(--orange); }
+  .prize-label { font-size: 0.85rem; color: var(--text-muted); }
+  .prize-trophy { font-size: 3rem; margin-bottom: 16px; display: block; }
+
+  /* ─── SCHEDULE ─── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:2px; background: linear-gradient(to bottom, var(--orange), var(--gold), var(--orange)); }
+
+  .timeline-item { position: relative; margin-bottom: 28px; }
+  .timeline-item::before { content:''; position:absolute; left:-38px; top:6px; width:12px; height:12px; background: var(--orange); border-radius: 50%; border: 2px solid var(--bg); box-shadow: 0 0 8px var(--orange-glow); }
+  .timeline-time { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--orange); font-weight: 700; margin-bottom: 4px; }
+  .timeline-event { font-size: 1rem; font-weight: 600; color: var(--text); }
+  .timeline-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* ─── ACTIVITIES ─── */
+  .activities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .activity-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .activity-item:hover { border-color: var(--orange); background: var(--orange-dim); }
+  .activity-emoji { font-size: 2.5rem; margin-bottom: 10px; }
+  .activity-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+  /* ─── REGISTRATION ─── */
+  .reg-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: start; }
+  @media (max-width: 800px) { .reg-layout { grid-template-columns: 1fr; } }
+
+  .reg-steps { display: flex; flex-direction: column; gap: 20px; }
+  .reg-step {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.3s;
+  }
+  .reg-step:hover { border-color: var(--orange); }
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--orange);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .step-text .step-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+  .step-text .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  .reg-sidebar {
+    position: sticky; top: 84px;
+  }
+  .reg-card {
+    background: var(--orange);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 20px 60px var(--orange-glow);
+  }
+  .reg-fee-label { font-size: 0.75rem; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  .reg-fee { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: #fff; line-height: 1; margin: 8px 0; }
+  .reg-fee-sub { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-bottom: 28px; }
+  .reg-contacts { display: flex; flex-direction: column; gap: 10px; }
+  .contact-pill {
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 700;
+  }
+  .contact-label { font-size: 0.65rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+
+  /* ─── IMAGE GALLERY ─── */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 240px 240px;
+    gap: 12px;
+  }
+  @media (max-width: 700px) { .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; } }
+
+  .gallery-item { border-radius: 12px; overflow: hidden; }
+  .gallery-item:first-child { grid-row: 1 / 3; }
+
+  .gallery-placeholder {
+    width: 100%; height: 100%;
+    background: var(--surface);
+    border: 2px dashed var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    border-radius: 12px;
+  }
+  .gallery-placeholder:hover { border-color: var(--orange); }
+  .gp-icon { font-size: 2rem; opacity: 0.4; }
+  .gp-text { font-size: 0.7rem; font-family: 'Space Mono', monospace; opacity: 0.5; letter-spacing: 1px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 60px 5% 32px;
+  }
+  .footer-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 700px) { .footer-layout { grid-template-columns: 1fr; gap: 40px; } }
+
+  .footer-brand .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--orange); }
+  .footer-brand .tagline { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-muted); margin: 8px 0 16px; font-style: italic; }
+  .footer-brand .desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+  .footer-col h4 { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col li { font-size: 0.9rem; color: var(--text-muted); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    font-size: 0.8rem; color: var(--text-dim);
+  }
+  .footer-bottom .eon-mark { color: var(--orange); font-weight: 700; }
+
+  /* ─── DRESS CODE STRIP ─── */
+  .dress-strip {
+    padding: 40px 5%;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .dress-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 3px; color: var(--text); margin-bottom: 16px; }
+  .color-swatches { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .swatch {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 2px solid var(--border);
+    transition: transform 0.2s;
+    cursor: default;
+  }
+  .swatch:hover { transform: scale(1.2); }
+
+  /* ─── MOBILE NAV ─── */
+  @media (max-width: 800px) {
+    .nav-links { display: none; }
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--orange);
+    padding: 12px 0;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-inner span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.9);
+    padding: 0 32px;
+  }
+  .marquee-inner .sep { color: rgba(255,255,255,0.4); }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ─── PROGRAM BADGE ─── */
+  .program-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 32px;
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-top: 40px;
+  }
+  .note-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .note-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .note-text strong { color: var(--text); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>EON</span> CUP</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#venue">Venue</a></li>
+    <li><a href="#format">Format</a></li>
+    <li><a href="#prizes">Prizes</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#register">Register</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="theme-icon" id="theme-icon">🌙</span>
+    <div class="theme-toggle" id="theme-toggle" title="Toggle theme"></div>
+    <a href="#register" class="nav-cta">Register Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="field-lines"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      April 19, 2026 &nbsp;·&nbsp; Mbarara Sports Arena
+    </div>
+    <h1 class="hero-title">
+      <span>EON</span>
+      <span class="accent">Interprogram</span>
+      <span class="accent">Finalists Cup</span>
+      <span class="year">2026</span>
+    </h1>
+    <p class="hero-tagline">" Where Finalists Become Legends "</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Programs</span>
+        <span class="meta-value orange">25</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Entry Fee</span>
+        <span class="meta-value orange">130K</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Prize Pool</span>
+        <span class="meta-value orange">900K+</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Format</span>
+        <span class="meta-value">7-a-side</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Time</span>
+        <span class="meta-value">8AM–9PM</span>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#register" class="btn-primary">⚽ Register Your Team</a>
+      <a href="#format" class="btn-secondary">How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>EON INTERPROGRAM FINALISTS CUP 2026</span>
+    <span class="sep">⚽</span>
+    <span>WHERE FINALISTS BECOME LEGENDS</span>
+    <span class="sep">🏆</span>
+    <span>APRIL 19 · MBARARA SPORTS ARENA</span>
+    <span class="sep">🎯</span>
+    <span>25 PROGRAMS · 7-A-SIDE · 700K PRIZE</span>
+    <span class="sep">⚽</span>
+    <span>EON INTERPROGRAM FINALISTS CUP 2026</span>
+    <span class="sep">⚽</span>
+    <span>WHERE FINALISTS BECOME LEGENDS</span>
+    <span class="sep">🏆</span>
+    <span>APRIL 19 · MBARARA SPORTS ARENA</span>
+    <span class="sep">🎯</span>
+    <span>25 PROGRAMS · 7-A-SIDE · 700K PRIZE</span>
+    <span class="sep">⚽</span>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-strip">
+  <span class="countdown-label">⚡ Countdown to Kickoff</span>
+  <div class="countdown-units">
+    <div class="c-unit"><div class="c-num" id="cd-days">00</div><div class="c-label">Days</div></div>
+    <div class="c-unit"><div class="c-num" id="cd-hours">00</div><div class="c-label">Hours</div></div>
+    <div class="c-unit"><div class="c-num" id="cd-mins">00</div><div class="c-label">Mins</div></div>
+    <div class="c-unit"><div class="c-num" id="cd-secs">00</div><div class="c-label">Secs</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-tag">// About the Event</div>
+    <h2 class="section-title">More Than a Tournament</h2>
+    <p class="section-sub">The EON Interprogram Finalists Cup is a celebration of achievement, unity, and the bonds forged across programs. As finalists take their final bow, they do it on the pitch.</p>
+  </div>
+  <div class="info-grid reveal">
+    <div class="info-card">
+      <div class="card-icon">🎓</div>
+      <div class="card-title">Finalists Farewell</div>
+      <div class="card-desc">A fitting send-off for graduating students across all programs. Celebrate your final year in the most legendary way possible — on the turf, with your people.</div>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">🤝</div>
+      <div class="card-title">Interprogram Unity</div>
+      <div class="card-desc">25 programs, one arena. Build bridges across faculties, make lifelong memories, and discover faces you've never met across the campus.</div>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">⚽</div>
+      <div class="card-title">7-a-Side Format</div>
+      <div class="card-desc">Fast-paced, high-energy matches on Mbarara Sports Arena's premium turf pitch. <span class="card-highlight">Group stages + knockouts</span> all in one epic day.</div>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">🌟</div>
+      <div class="card-title">Mixed Squads Allowed</div>
+      <div class="card-desc">Can't fill a squad with finalists alone? Continuing students from the same program can join — because <span class="card-highlight">no program gets left out</span>.</div>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">🎉</div>
+      <div class="card-title">Festival Atmosphere</div>
+      <div class="card-desc">Music, board games, chess, ice cream, snacks, and drinks all day long. This isn't just a tournament — it's a full-day festival.</div>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">👗</div>
+      <div class="card-title">Dress Code: Bright Colors</div>
+      <div class="card-desc">Show up in your most vibrant, eye-catching outfit. Let's make Mbarara Sports Arena a sea of color, energy, and joy.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DRESS CODE STRIP -->
+<div class="dress-strip reveal">
+  <div class="dress-title">👗 Dress Code — Any Bright Color</div>
+  <div class="color-swatches">
+    <div class="swatch" style="background:#FF4444;" title="Red"></div>
+    <div class="swatch" style="background:#FF8C00;" title="Orange"></div>
+    <div class="swatch" style="background:#FFD700;" title="Yellow"></div>
+    <div class="swatch" style="background:#44CC44;" title="Green"></div>
+    <div class="swatch" style="background:#00BFFF;" title="Sky Blue"></div>
+    <div class="swatch" style="background:#FF69B4;" title="Pink"></div>
+    <div class="swatch" style="background:#DA70D6;" title="Purple"></div>
+    <div class="swatch" style="background:#00CED1;" title="Teal"></div>
+    <div class="swatch" style="background:#FF6347;" title="Tomato"></div>
+    <div class="swatch" style="background:#7FFF00;" title="Chartreuse"></div>
+  </div>
+</div>
+
+<!-- VENUE -->
+<section id="venue" class="section-alt">
+  <div class="section-header reveal">
+    <div class="section-tag">// The Venue</div>
+    <h2 class="section-title">Mbarara Sports Arena</h2>
+    <p class="section-sub">A world-class sports complex home to a premium artificial turf pitch, volleyball court, netball pitch, and swimming pool. The perfect stage for legends.</p>
+  </div>
+  <div class="venue-layout reveal">
+    <div>
+      <ul class="venue-features">
+        <li class="venue-feature"><span class="feature-dot"></span>Premium artificial turf soccer pitch — 7-a-side ready</li>
+        <li class="venue-feature"><span class="feature-dot"></span>Full-size volleyball court for sideline fun</li>
+        <li class="venue-feature"><span class="feature-dot"></span>Netball pitch for the champions off the ball</li>
+        <li class="venue-feature"><span class="feature-dot"></span>Mini swimming pool — cool off between matches</li>
+        <li class="venue-feature"><span class="feature-dot"></span>Gorgeous, gorgeous venue. You just have to be there. 🔥</li>
+        <li class="venue-feature"><span class="feature-dot"></span>Dedicated spectator areas with views of all action</li>
+        <li class="venue-feature"><span class="feature-dot"></span>Food & drinks zone, board game corner, music stage</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="venue-image-placeholder">
+        <div class="venue-image-placeholder-overlay"></div>
+        <div class="img-icon">🏟️</div>
+        <div class="img-label">Main Turf Pitch Photo</div>
+        <div style="font-size:0.65rem;opacity:0.3;font-family:'Space Mono',monospace;">[ Replace with venue image ]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div style="margin-top:60px;" class="reveal">
+    <div class="section-tag">// Photo Gallery</div>
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:2px;margin-bottom:24px;">The Arena in All Its Glory</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <div class="gp-icon">📸</div>
+          <div class="gp-text">Full Venue Aerial</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <div class="gp-icon">🏊</div>
+          <div class="gp-text">Swimming Pool</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <div class="gp-icon">🏐</div>
+          <div class="gp-text">Volleyball Court</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <div class="gp-icon">⚽</div>
+          <div class="gp-text">Turf Close-up</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <div class="gp-icon">🌅</div>
+          <div class="gp-text">Venue Entrance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section id="format">
+  <div class="section-header reveal">
+    <div class="section-tag">// Tournament Format</div>
+    <h2 class="section-title">How It Goes Down</h2>
+    <p class="section-sub">25 programs. Group stage robin play. Then knockouts. One champion remains.</p>
+  </div>
+  <div class="format-grid reveal">
+    <div class="format-card">
+      <div class="format-num">25</div>
+      <div class="format-unit">Competing</div>
+      <div class="format-label">Programs</div>
+    </div>
+    <div class="format-card">
+      <div class="format-num">7</div>
+      <div class="format-unit">Players on Pitch</div>
+      <div class="format-label">Including GK</div>
+    </div>
+    <div class="format-card">
+      <div class="format-num">14</div>
+      <div class="format-unit">Max Squad</div>
+      <div class="format-label">Per Team</div>
+    </div>
+    <div class="format-card">
+      <div class="format-num">20</div>
+      <div class="format-unit">Minutes</div>
+      <div class="format-label">Group Matches</div>
+    </div>
+    <div class="format-card">
+      <div class="format-num">30</div>
+      <div class="format-unit">Minutes</div>
+      <div class="format-label">Knockout Matches</div>
+    </div>
+    <div class="format-card">
+      <div class="format-num">8</div>
+      <div class="format-unit">Hours of</div>
+      <div class="format-label">Football & Fun</div>
+    </div>
+  </div>
+
+  <div class="program-note reveal">
+    <div class="note-icon">📋</div>
+    <div class="note-text">
+      <strong>Eligibility Rule:</strong> Teams are primarily for finalists (final year students), but if a program cannot raise a full squad from finalists alone, <strong>continuing students from the same program</strong> are allowed to participate as part of that program's team. All players must belong to the same program.
+    </div>
+  </div>
+</section>
+
+<!-- PRIZES -->
+<section id="prizes" class="section-alt">
+  <div class="section-header reveal">
+    <div class="section-tag">// Prizes & Awards</div>
+    <h2 class="section-title">What's at Stake</h2>
+    <p class="section-sub">Win glory. Win cash. Win the memory of a lifetime.</p>
+  </div>
+  <div class="prizes-layout reveal">
+    <div class="prize-card gold-card">
+      <span class="prize-trophy">🏆</span>
+      <div class="prize-pos">1st</div>
+      <div class="prize-amount">700,000/=</div>
+      <div class="prize-label">Champions Prize</div>
+    </div>
+    <div class="prize-card silver-card">
+      <span class="prize-trophy">🥈</span>
+      <div class="prize-pos">2nd</div>
+      <div class="prize-amount">200,000/=</div>
+      <div class="prize-label">Runners-Up Prize</div>
+    </div>
+    <div class="prize-card special-card">
+      <span class="prize-trophy">⭐</span>
+      <div class="prize-pos" style="color:var(--orange);font-size:2rem;">MVP</div>
+      <div class="prize-amount" style="font-size:1.8rem;">Award</div>
+      <div class="prize-label">Most Valuable Player</div>
+    </div>
+    <div class="prize-card special-card">
+      <span class="prize-trophy">👑</span>
+      <div class="prize-pos" style="color:#FF69B4;font-size:1.6rem;">Best Female</div>
+      <div class="prize-amount" style="font-size:1.8rem; color:#FF69B4;">Player</div>
+      <div class="prize-label">Special Recognition Award</div>
+    </div>
+  </div>
+  <div style="margin-top:28px; text-align:center; color:var(--text-muted); font-size:0.85rem;" class="reveal">
+    + More surprise prizes and awards on the day 🎁
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="section-header reveal">
+    <div class="section-tag">// Day Schedule</div>
+    <h2 class="section-title">April 19 — Timeline</h2>
+    <p class="section-sub">From first whistle to final ceremony — here's your full day at Mbarara Sports Arena.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;" class="reveal">
+    <div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-time">7:00 AM</div>
+          <div class="timeline-event">Gates Open / Team Check-in</div>
+          <div class="timeline-note">Teams arrive, register, receive kits & briefing</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-event">🔔 Opening Ceremony</div>
+          <div class="timeline-note">Official kickoff address, group draws announced</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">8:30 AM</div>
+          <div class="timeline-event">⚽ Group Stage Begins</div>
+          <div class="timeline-note">Robin-style group matches, 20 mins each</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">12:00 PM</div>
+          <div class="timeline-event">🍽 Lunch Break</div>
+          <div class="timeline-note">Food zone open, board games active, music up</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-event">⚡ Knockout Rounds</div>
+          <div class="timeline-note">30-minute matches, quarterfinals → semis</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">5:00 PM</div>
+          <div class="timeline-event">🏆 Grand Final</div>
+          <div class="timeline-note">The ultimate clash — 30 minutes of pure glory</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">6:30 PM</div>
+          <div class="timeline-event">🎖 Awards Ceremony</div>
+          <div class="timeline-note">MVP, Best Female Player, Champions, Runners-up</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">7:00 PM</div>
+          <div class="timeline-event">🎶 Farewell Celebration</div>
+          <div class="timeline-note">Music, drinks, photos — celebrate the finalists!</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-time">9:00 PM</div>
+          <div class="timeline-event">🌙 Event Close</div>
+          <div class="timeline-note">Legends go home. The memories last forever.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-tag">// Side Activities All Day</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:2px;margin-bottom:28px;">Off the Pitch</h3>
+      <div class="activities-grid">
+        <div class="activity-item"><div class="activity-emoji">♟️</div><div class="activity-name">Chess</div></div>
+        <div class="activity-item"><div class="activity-emoji">🎲</div><div class="activity-name">Board Games</div></div>
+        <div class="activity-item"><div class="activity-emoji">🍦</div><div class="activity-name">Ice Cream</div></div>
+        <div class="activity-item"><div class="activity-emoji">🥤</div><div class="activity-name">Drinks</div></div>
+        <div class="activity-item"><div class="activity-emoji">🍿</div><div class="activity-name">Snacks</div></div>
+        <div class="activity-item"><div class="activity-emoji">🎵</div><div class="activity-name">Live Music</div></div>
+        <div class="activity-item"><div class="activity-emoji">🏊</div><div class="activity-name">Pool Access</div></div>
+        <div class="activity-item"><div class="activity-emoji">📸</div><div class="activity-name">Photo Moments</div></div>
+        <div class="activity-item"><div class="activity-emoji">🏐</div><div class="activity-name">Volleyball</div></div>
+        <div class="activity-item"><div class="activity-emoji">🎉</div><div class="activity-name">& So Much More</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="register" class="section-alt">
+  <div class="section-header reveal">
+    <div class="section-tag">// Registration</div>
+    <h2 class="section-title">Secure Your Spot</h2>
+    <p class="section-sub">25 programs. Limited squad spots. Don't let your program miss out on the biggest farewell party of 2026.</p>
+  </div>
+  <div class="reg-layout reveal">
+    <div>
+      <div class="reg-steps">
+        <div class="reg-step">
+          <div class="step-num">01</div>
+          <div class="step-text">
+            <div class="step-title">Assemble Your Squad</div>
+            <div class="step-desc">Gather up to 14 players from your program. Finalists have priority, but continuing students of the same program can fill remaining spots.</div>
+          </div>
+        </div>
+        <div class="reg-step">
+          <div class="step-num">02</div>
+          <div class="step-text">
+            <div class="step-title">Contact the Organizers</div>
+            <div class="step-desc">Reach out via the numbers below to express your program's interest and receive registration instructions.</div>
+          </div>
+        </div>
+        <div class="reg-step">
+          <div class="step-num">03</div>
+          <div class="step-text">
+            <div class="step-title">Pay the Registration Fee</div>
+            <div class="step-desc">Register your team by paying <strong>UGX 130,000</strong>. Payment details will be provided by the organizers upon contact.</div>
+          </div>
+        </div>
+        <div class="reg-step">
+          <div class="step-num">04</div>
+          <div class="step-text">
+            <div class="step-title">Submit Player List</div>
+            <div class="step-desc">Provide names and details of all registered players (max 14). All players must be enrolled in your program.</div>
+          </div>
+        </div>
+        <div class="reg-step">
+          <div class="step-num">05</div>
+          <div class="step-text">
+            <div class="step-title">Show Up & Shine</div>
+            <div class="step-desc">Arrive by 7:00 AM on April 19th in your brightest colors. The turf awaits. History will be written.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reg-sidebar">
+      <div class="reg-card">
+        <div class="reg-fee-label">Registration Fee</div>
+        <div class="reg-fee">130K</div>
+        <div class="reg-fee-sub">per program / team</div>
+        <div style="height:1px;background:rgba(255,255,255,0.15);margin:20px 0;"></div>
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;font-weight:800;">📞 Contact for Registration</div>
+        <div class="reg-contacts">
+          <div class="contact-pill">
+            <div class="contact-label">Phone / WhatsApp</div>
+            +256 759 330 620
+          </div>
+          <div class="contact-pill">
+            <div class="contact-label">Phone</div>
+            +256 761 506 472
+          </div>
+        </div>
+        <div style="margin-top:20px;font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.6;">
+          📅 Tournament Date: <strong style="color:#fff;">April 19, 2026</strong><br>
+          ⏰ Gates open: <strong style="color:#fff;">7:00 AM</strong><br>
+          📍 Venue: <strong style="color:#fff;">Mbarara Sports Arena</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-layout">
+    <div class="footer-brand">
+      <div class="logo">EON CUP 2026</div>
+      <div class="tagline">" Where Finalists Become Legends "</div>
+      <div class="desc">The EON Interprogram Finalists Cup is a celebration of graduation, unity, and competition — bringing together 25 programs on one glorious day at Mbarara Sports Arena.</div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about" style="color:inherit;text-decoration:none;">About the Event</a></li>
+        <li><a href="#venue" style="color:inherit;text-decoration:none;">Venue Details</a></li>
+        <li><a href="#format" style="color:inherit;text-decoration:none;">Tournament Format</a></li>
+        <li><a href="#prizes" style="color:inherit;text-decoration:none;">Prizes & Awards</a></li>
+        <li><a href="#schedule" style="color:inherit;text-decoration:none;">Day Schedule</a></li>
+        <li><a href="#register" style="color:inherit;text-decoration:none;">Register</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Event Details</h4>
+      <ul>
+        <li>📅 April 19, 2026</li>
+        <li>⏰ 8:00 AM – 9:00 PM</li>
+        <li>📍 Mbarara Sports Arena</li>
+        <li>⚽ 7-a-side Format</li>
+        <li>👥 25 Programs</li>
+        <li>💰 UGX 130,000 Entry</li>
+        <li>🏆 UGX 700K Champion Prize</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 EON Interprogram Finalists Cup. All rights reserved.</span>
+    <span>Powered by <span class="eon-mark">EON App</span> · Built for the Legends 🔥</span>
+  </div>
+</footer>
+
+<script>
+  // ─── THEME TOGGLE ───
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-icon');
+  toggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    icon.textContent = isDark ? '☀️' : '🌙';
+  });
+
+  // ─── COUNTDOWN ───
+  function updateCountdown() {
+    const target = new Date('2026-04-19T08:00:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ─── SCROLL REVEAL ───
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
